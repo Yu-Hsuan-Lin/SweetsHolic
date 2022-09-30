@@ -1,0 +1,74 @@
+<% layout('./layouts/boilerplate')%>
+<div class="row">
+    <h1 class="text-center">Edit Restaurant</h1>
+    <div class="col-6 offset-3">
+        <form action="/restaurants/<%=restaurant._id%>?_method=PUT" method="POST" class="validated-form" novalidate
+            enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <!-- name="restaurant[title]": everthing will be store under restaurant -->
+                <input class="form-control" type="text" id="title" name="restaurant[title]" required
+                    value="<%=restaurant.title%>">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="location">Location</label>
+                <!-- name="restaurant[title]": everthing will be store under restaurant -->
+                <input class="form-control" type="text" id="location" name="restaurant[location]" required
+                    value="<%=restaurant.location%>">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="price">Restaurant Price</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="price-label">$</span>
+                    <input type="text" class="form-control" id="price" placeholder="0.0" aria-label="price"
+                        aria-describedby="price-label" name="restaurant[price]" required value="<%=restaurant.price%>">
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="description">description</label>
+                <!-- name="restaurant[title]": everthing will be store under restaurant -->
+                <textarea class="form-control" type="text" id="description" name="restaurant[description]"
+                    required><%= restaurant.description%></textarea>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+
+            </div>
+            <div class="mb-3">
+                <div class="mb-3">
+                    <div class="input-group mb-3 custom-file">
+                        <input type="file" placeholder="Add more images" class="form-control custom-file-input"
+                            id="image" name="image" multiple>
+                        <label class="input-group-text custom-file-label" for="image">Browse</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <% restaurant.images.forEach(function(img, i) { %>
+                    <% console.log(img) %>
+                    <img src="<%=img.thumbnail%>" class="img-thumbnail" alt="">
+                    <div class="form-check-inline">
+                        <!-- Any checkbox that was checked, its value is added to deleteImages[]. deleteImages[] is an array when we parse the body -->
+                        <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                        <label for="image-<%=i%>">Delete</label>
+                    </div>
+                    <% }) %>
+                </div>
+
+                <div class="mb-3">
+                    <button class="btn btn-info">Update Restaurant</button>
+                </div>
+        </form>
+        <a href="/restaurants">Back To Restaurants</a>
+    </div>
+</div>

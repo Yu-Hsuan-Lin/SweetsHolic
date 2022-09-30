@@ -1,0 +1,70 @@
+<% layout('./layouts/boilerplate')%>
+<div class="row">
+    <h1 class="text-center">New Restaurant</h1>
+    <div class="col-6 offset-3">
+        <div class="card shadow">
+            <div class="card-body">
+                <form action="/restaurants" method="POST" class="validated-form" novalidate
+                    enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label" for="title">Title</label>
+                        <!-- name="restaurant[title]": everthing will be store under restaurant -->
+                        <input class="form-control" type="text" id="title" name="restaurant[title]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <!-- multiple can upload multiple files -->
+                    <div class="mb-3">
+                        <label class="form-label" for="location">Location</label>
+                        <!-- name="restaurant[title]": everthing will be store under restaurant -->
+                        <input class="form-control" type="text" id="location" name="restaurant[location]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <!-- <div class="mb-3">
+                <label class="form-label" for="image">Image Url</label> -->
+                    <!-- name="restaurant[title]": everthing will be store under restaurant -->
+                    <!-- <input class="form-control" type="text" id="image" name="restaurant[image]" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div> -->
+                    <div class="mb-3">
+                        <label class="form-label" for="price">Restaurant Price</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="price-label">$</span>
+                            <input type="text" class="form-control" id="price" placeholder="0.0" aria-label="price"
+                                aria-describedby="price-label" name="restaurant[price]" required>
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="description">description</label>
+                        <!-- name="restaurant[title]": everthing will be store under restaurant -->
+                        <textarea class="form-control" type="text" id="description"
+                            name="restaurant[description]"></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="input-group mb-3 custom-file">
+                            <input type="file" class="form-control custom-file-input" id="image" name="image" multiple>
+                            <label class="input-group-text custom-file-label" for="image">Browse</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-success">Add Restaurant</button>
+                    </div>
+
+                    <a href="/restaurants">All Restaurants</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
