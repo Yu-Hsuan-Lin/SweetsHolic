@@ -21,7 +21,12 @@ const userRoutes = require('./routes/users');
 const restaurantsRoutes = require('./routes/restaurants');
 const reviewsRoutes = require('./routes/reviews');
 
-mongoose.connect('mongodb://localhost:27017/yummer', {
+const MongoStore = require('connect-mongo');
+
+//delpoy: const dbUrl = process.env.DB_URL;
+//development: using local database: 'mongodb://localhost:27017/yummer'
+const dbUrl = 'mongodb://localhost:27017/yummer';
+mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
@@ -43,7 +48,26 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+    store: MongoStore.create({ mongoUrl: dbUrl })
+}));
+
+// ========I want to make it a var but failed ==================
+// var store = MongoStore.create ({
+//     url: dbUrl,
+//     secret: 'secret',
+//     touchAfter:  24 * 60 * 60// lazy update the session: update time period
+// });
+
+// store.on("error", function(e){
+//     console.log("session store error", e)
+// })
+// ========I want to make it a var but failed ==================
+
 const sessionConfig = {
+    store: MongoStore.create({ mongoUrl: dbUrl,
+        secret: 'secret',
+        touchAfter:  24 * 60 * 60}),
     secret: 'thisshouldbeabettersecret',
     resave: false,
     saveUnintialized: true,
